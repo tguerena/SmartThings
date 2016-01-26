@@ -12,7 +12,7 @@ preferences {
 		input("local_on_path", "text", title: "Local On Path (/blah?q=this)", required: false)
 }
 metadata {
-	definition (name: "On & Off Button Tiles as Defined from URIs", namespace: "smartthings", author: "SmartThings") {
+	definition (name: "uriswitch", namespace: "tguerena", author: "Troy Guerena") {
 		capability "Actuator"
 			capability "Switch"
 			capability "Sensor"
