@@ -1,5 +1,6 @@
 /*
 * Author: Troy Guerena and Tom Valdes
+* Device Handler
 */
 
 
