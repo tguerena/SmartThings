@@ -6,13 +6,22 @@
 
 
 preferences {
-	input("on_uri", "text", title: "On URI", required: false)
-		input("off_uri", "text", title: "Off URI", required: false)
-		input("local_ip", "text", title: "Local IP", required: false)
-		input("local_port", "text", title: "Local Port (if not 80)", required: false)
-		input("local_off_path", "text", title: "Local Off Path (/blah?q=this)", required: false)
-		input("local_on_path", "text", title: "Local On Path (/blah?q=this)", required: false)
+	section("External Access"){
+		input "external_on_uri", "text", title: "External On URI", required: false
+		input "external_off_uri", "text", title: "External Off URI", required: false
+	}
+    
+	section("Internal Access"){
+		input "internal_ip", "text", title: "Internal IP", required: false
+		input "internal_port", "text", title: "Internal Port (if not 80)", required: false
+		input "internal_off_path", "text", title: "Internal Off Path (/blah?q=this)", required: false
+		input "internal_on_path", "text", title: "Internal On Path (/blah?q=this)", required: false
+	}
 }
+
+
+
+
 metadata {
 	definition (name: "uriswitch", namespace: "tguerena", author: "Troy Guerena") {
 		capability "Actuator"
@@ -46,11 +55,11 @@ def parse(String description) {
 }
 
 def on() {
-	if (on_uri){
+	if (external_on_uri){
 		// sendEvent(name: "switch", value: "on")
 		// log.debug "Executing ON"
 
-		def cmd = "${settings.on_uri}";
+		def cmd = "${settings.external_on_uri}";
 
 		log.debug "Sending request cmd[${cmd}]"
 
@@ -60,19 +69,19 @@ def on() {
 				} 
 			}
 	}
-	if (local_on_path){
+	if (internal_on_path){
 		def port
-			if (local_port){
-				port = "${local_port}"
+			if (internal_port){
+				port = "${internal_port}"
 			} else {
 				port = 80
 			}
 
 		def result = new physicalgraph.device.HubAction(
 				method: "GET",
-				path: "${local_on_path}",
+				path: "${internal_on_path}",
 				headers: [
-				HOST: "${local_ip}:${port}"
+				HOST: "${internal_ip}:${port}"
 				]
 				)
 			sendHubCommand(result)
@@ -83,33 +92,28 @@ def on() {
 }
 
 def off() {
-	if (off_uri){
-		// sendEvent(name: "switch", value: "off")
-		// log.debug "Executing OFF"
-
-		def cmd = "${settings.off_uri}";
-
+	if (external_off_uri){
+		def cmd = "${settings.external_off_uri}";
 		log.debug "Sending request cmd[${cmd}]"
-
 			httpGet(cmd) {resp ->
 				if (resp.data) {
 					log.info "${resp.data}"
 				} 
 			}
 	}
-	if (local_off_path){
+	if (internal_off_path){
 		def port
-			if (local_port){
-				port = "${local_port}"
+			if (internal_port){
+				port = "${internal_port}"
 			} else {
 				port = 80
 			}
 
 		def result = new physicalgraph.device.HubAction(
 				method: "GET",
-				path: "${local_off_path}",
+				path: "${internal_off_path}",
 				headers: [
-				HOST: "${local_ip}:${port}"
+				HOST: "${internal_ip}:${port}"
 				]
 				)
 
