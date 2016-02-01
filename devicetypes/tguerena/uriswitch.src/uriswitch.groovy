@@ -14,8 +14,8 @@ preferences {
 	section("Internal Access"){
 		input "internal_ip", "text", title: "Internal IP", required: false
 		input "internal_port", "text", title: "Internal Port (if not 80)", required: false
-		input "internal_off_path", "text", title: "Internal Off Path (/blah?q=this)", required: false
 		input "internal_on_path", "text", title: "Internal On Path (/blah?q=this)", required: false
+		input "internal_off_path", "text", title: "Internal Off Path (/blah?q=this)", required: false
 	}
 }
 
