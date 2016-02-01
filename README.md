@@ -2,8 +2,8 @@
 
 External calls triggered with On and Off commands
 -------------------------------------------------
-External On URI                   ie:  www.externalaccess.com/turn_lightOn	
-External Off URI                  ie:  www.externalaccess.com/turn_lightOff
+External On URI                   ie:  http://www.externalaccess.com/turn_lightOn	
+External Off URI                  ie:  http://www.externalaccess.com/turn_lightOff
 
 Internal calls triggered with On and Off commands
 -------------------------------------------------
