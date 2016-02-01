@@ -1,5 +1,8 @@
 # SmartThings
 
+URI Switch
+Attached to a Virtual Switch, this kicks off a URL (External and/or Internal) when an On/Off command is sent
+
 External calls triggered with On and Off commands
 -------------------------------------------------
 
