@@ -23,7 +23,7 @@ preferences {
 
 
 metadata {
-	definition (name: "uriswitch", namespace: "tguerena", author: "Troy Guerena") {
+	definition (name: "URI Switch", namespace: "tguerena", author: "Troy Guerena") {
 		capability "Actuator"
 			capability "Switch"
 			capability "Sensor"
