@@ -20,3 +20,7 @@ Internal Port (if not 80)
 Internal On Path (/blah?q=this) --- /api/HomeAutomation.X10/o1/Control.Off
 
 Internal Off Path (/blah?q=this) --- /api/HomeAutomation.X10/o1/Control.On
+
+
+
+For stateless URI Button see https://github.com/ruricu/SmartThings
