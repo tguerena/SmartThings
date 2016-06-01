@@ -15,8 +15,8 @@
 */
 
 definition(
-   name: "Logstash Event Logger - with local option - v2",
-   namespace: "tguerena/surge919",
+   name: "Logstash Event Logger - with local option",
+   namespace: "tguerena",
    author: "using code from Brian Keifer",
    description: "Log SmartThings events to a Logstash server -- added a local option as well as a other updates",
    category: "Convenience",
