@@ -16,7 +16,7 @@
 
 definition(
    name: "Logstash Event Logger - with local option",
-   namespace: "tguerena",
+   namespace: "bkeifer",
    author: "using code from Brian Keifer",
    description: "Log SmartThings events to a Logstash server -- added a local option as well as a other updates",
    category: "Convenience",
