@@ -15,7 +15,7 @@
 */
 
 definition(
-   name: "Logstash Event Logger - with local option - v2",
+   name: "Logstash Event Logger - with local option",
    namespace: "bkeifer",
    author: "Brian Keifer",
    description: "Log SmartThings events to a Logstash server",
