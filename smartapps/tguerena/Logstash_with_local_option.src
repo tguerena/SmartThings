@@ -16,9 +16,9 @@
 
 definition(
    name: "Logstash Event Logger - with local option - v2",
-   namespace: "bkeifer",
-   author: "Brian Keifer",
-   description: "Log SmartThings events to a Logstash server",
+   namespace: "tguerena/surge919",
+   author: "using code from Brian Keifer",
+   description: "Log SmartThings events to a Logstash server -- added a local option as well as a other updates",
    category: "Convenience",
    iconUrl: "http://valinor.net/images/logstash-logo-square.png",
    iconX2Url: "http://valinor.net/images/logstash-logo-square.png",
