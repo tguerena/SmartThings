@@ -41,19 +41,19 @@ definition(
 
 preferences {
 	section("Log these presence sensors:") {
-       input "presences", "capability.presenceSensor", multiple: true, required: false
+		input "presences", "capability.presenceSensor", multiple: true, required: false
 	}
 	section("Log these switches:") {
-    	input "switches", "capability.switch", multiple: true, required: false
+		input "switches", "capability.switch", multiple: true, required: false
 	}
 	section("Log these switch levels:") {
-    	input "levels", "capability.switchLevel", multiple: true, required: false
+		input "levels", "capability.switchLevel", multiple: true, required: false
 	}
 	section("Log these motion sensors:") {
-    	input "motions", "capability.motionSensor", multiple: true, required: false
+		input "motions", "capability.motionSensor", multiple: true, required: false
 	}
 	section("Log these temperature sensors:") {
-    	input "temperatures", "capability.temperatureMeasurement", multiple: true, required: false
+		input "temperatures", "capability.temperatureMeasurement", multiple: true, required: false
 	}
    //added thermostat section -- begin
 	section("Log these thermostats:") {
@@ -61,7 +61,7 @@ preferences {
 	}
    //added thermostat section -- end
    	section("Log these humidity sensors:") {
-    	input "humidities", "capability.relativeHumidityMeasurement", multiple: true, required: false
+		input "humidities", "capability.relativeHumidityMeasurement", multiple: true, required: false
 	}
 	section("Log these contact sensors:") {
 		input "contacts", "capability.contactSensor", multiple: true, required: false
