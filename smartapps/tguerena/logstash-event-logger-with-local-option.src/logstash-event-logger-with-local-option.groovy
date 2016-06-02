@@ -19,8 +19,8 @@ under the License.
 */
 
 definition(
-   name: "Logstash Event Logger - with local option - v2",
-   namespace: "bkeifer",
+   name: "Logstash Event Logger - with local option",
+   namespace: "tguerena",
    author: "Brian Keifer",
    description: "Log SmartThings events to a Logstash server",
    category: "Convenience",
