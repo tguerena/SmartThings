@@ -20,7 +20,8 @@ under the License.
 
 /**
 *
-*  Changelog:  added local option
+*  Changelog:
+*  2016/05/30:  added option to specify a local IP address for the logstash server
 *
 *
 */
