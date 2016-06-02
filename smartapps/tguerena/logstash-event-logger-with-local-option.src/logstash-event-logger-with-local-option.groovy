@@ -3,102 +3,95 @@
 *
 *  Copyright 2015 Brian Keifer
 *
-*  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+*  Licensed under the Apache License, Version 2.0 (the "License"); you
+may not use this file except
 *  in compliance with the License. You may obtain a copy of the License at:
 *
 *      http://www.apache.org/licenses/LICENSE-2.0
 *
-*  Unless required by applicable law or agreed to in writing, software distributed under the License is distributed
-*  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License
-*  for the specific language governing permissions and limitations under the License.
-*
-*/
-
-/**
-*
-*
-*  updated to include a local option
-*
+*  Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed
+*  on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+either express or implied. See the License
+*  for the specific language governing permissions and limitations
+under the License.
 *
 */
 
 definition(
-   name: "Logstash Event Logger - with local option",
-   namespace: "tguerena",
+   name: "Logstash Event Logger - with local option - v2",
+   namespace: "bkeifer",
    author: "Brian Keifer",
    description: "Log SmartThings events to a Logstash server",
    category: "Convenience",
    iconUrl: "http://valinor.net/images/logstash-logo-square.png",
    iconX2Url: "http://valinor.net/images/logstash-logo-square.png",
-   iconX3Url: "http://valinor.net/images/logstash-logo-square.png")
+   iconX3Url: "http://valinor.net/images/logstash-logo-square.png"
+   )
 
 
 preferences {
-   section("Log these presence sensors:") {
+	section("Log these presence sensors:") {
        input "presences", "capability.presenceSensor", multiple: true, required: false
-   }
+	}
 	section("Log these switches:") {
-   	input "switches", "capability.switch", multiple: true, required: false
-   }
+    	input "switches", "capability.switch", multiple: true, required: false
+	}
 	section("Log these switch levels:") {
-   	input "levels", "capability.switchLevel", multiple: true, required: false
-   }
+    	input "levels", "capability.switchLevel", multiple: true, required: false
+	}
 	section("Log these motion sensors:") {
-   	input "motions", "capability.motionSensor", multiple: true, required: false
-   }
+    	input "motions", "capability.motionSensor", multiple: true, required: false
+	}
 	section("Log these temperature sensors:") {
-   	input "temperatures", "capability.temperatureMeasurement", multiple: true, required: false
-   }
+    	input "temperatures", "capability.temperatureMeasurement", multiple: true, required: false
+	}
    //added thermostat section -- begin
-   section("Log these thermostat sensors:") {
-   	input "thermostats", "capability.thermostat", multiple: true, required: false
-   }
-   //added thermostat section -- end   
-   section("Log these humidity sensors:") {
-   	input "humidities", "capability.relativeHumidityMeasurement", multiple: true, required: false
-   }
-   section("Log these contact sensors:") {
-   	input "contacts", "capability.contactSensor", multiple: true, required: false
-   }
-   section("Log these alarms:") {
+	section("Log these thermostat sensors:") {
+		input "thermostats", "capability.thermostat", multiple: true, required: false
+	}
+   //added thermostat section -- end
+   	section("Log these humidity sensors:") {
+    	input "humidities", "capability.relativeHumidityMeasurement", multiple: true, required: false
+	}
+	section("Log these contact sensors:") {
+		input "contacts", "capability.contactSensor", multiple: true, required: false
+	}
+	section("Log these alarms:") {
 		input "alarms", "capability.alarm", multiple: true, required: false
 	}
-   section("Log these indicators:") {
-   	input "indicators", "capability.indicator", multiple: true, required: false
-   }
-   section("Log these CO detectors:") {
-   	input "codetectors", "capability.carbonMonoxideDetector", multiple: true, required: false
-   }
-   section("Log these smoke detectors:") {
-   	input "smokedetectors", "capability.smokeDetector", multiple: true, required: false
-   }
-   section("Log these water detectors:") {
-   	input "waterdetectors", "capability.waterSensor", multiple: true, required: false
-   }
-   section("Log these acceleration sensors:") {
-   	input "accelerations", "capability.accelerationSensor", multiple: true, required: false
-   }
-   section("Log these energy meters:") {
-       input "energymeters", "capability.energyMeter", multiple: true, required: false
-   }
-
-   section ("Logstash Server") {
-       input "use_local", "boolean", title: "Local Server?", required: true
-       input "logstash_host", "text", title: "Logstash Hostname/IP"
-       input "logstash_port", "number", title: "Logstash Port"
-   }
-
+	section("Log these indicators:") {
+		input "indicators", "capability.indicator", multiple: true, required: false
+	}
+	section("Log these CO detectors:") {
+    	input "codetectors", "capability.carbonMonoxideDetector", multiple: true, required: false
+	}
+	section("Log these smoke detectors:") {
+		input "smokedetectors", "capability.smokeDetector", multiple: true, required: false
+	}
+	section("Log these water detectors:") {
+		input "waterdetectors", "capability.waterSensor", multiple: true, required: false
+	}
+	section("Log these acceleration sensors:") {
+		input "accelerations", "capability.accelerationSensor", multiple: true, required: false
+	}
+	section("Log these energy meters:") {
+		input "energymeters", "capability.energyMeter", multiple: true, required: false
+	}
+	section ("Logstash Server") {
+		input "use_local", "boolean", title: "Local Server?", required: true
+		input "logstash_host", "text", title: "Logstash Hostname/IP"
+		input "logstash_port", "number", title: "Logstash Port"
+	}
 }
 
 def installed() {
 	log.debug "Installed with settings: ${settings}"
-
 	initialize()
 }
 
 def updated() {
 	log.debug "Updated with settings: ${settings}"
-
 	unsubscribe()
 	initialize()
 }
@@ -109,50 +102,61 @@ def initialize() {
 }
 
 def doSubscriptions() {
-	subscribe(alarms,			"alarm",					alarmHandler)
-   subscribe(codetectors,		"carbonMonoxideDetector",	coHandler)
-	subscribe(contacts,			"contact",      			contactHandler)
-   subscribe(indicators,		"indicator",    			indicatorHandler)
-   subscribe(modes,			"locationMode", 			modeHandler)
-   subscribe(motions,			"motion",       			motionHandler)
-  	subscribe(presences,		"presence",     			presenceHandler)
-   subscribe(relays,			"relaySwitch",  			relayHandler)
-	subscribe(smokedetectors,	"smokeDetector",			smokeHandler)
-	subscribe(switches,			"switch",       			switchHandler)
-   subscribe(levels,			"level",					levelHandler)
-	subscribe(temperatures,		"temperature",  			temperatureHandler)
+	subscribe(alarms, "alarm", alarmHandler)
+	subscribe(codetectors, "carbonMonoxideDetector", coHandler)
+	subscribe(contacts, "contact",       contactHandler)
+   	subscribe(indicators, "indicator",     indicatorHandler)
+   	subscribe(modes, "locationMode", modeHandler)
+   	subscribe(motions, "motion",       motionHandler)
+  	subscribe(presences, "presence",     presenceHandler)
+   	subscribe(relays, "relaySwitch",   relayHandler)
+	subscribe(smokedetectors, "smokeDetector", smokeHandler)
+	subscribe(switches, "switch",       switchHandler)
+   	subscribe(levels, "level", levelHandler)
+	subscribe(temperatures, "temperature",   temperatureHandler)
     // thermostat - begin
-	subscribe(thermostats,		"temperature",  			thermostatHandler)
-    subscribe(thermostats,      "thermostatOperatingState",        thermostatOperatingStateHandler)
+	subscribe(thermostats, "temperature",   thermostatHandler)
+    subscribe(thermostats,      "thermostatOperatingState",	thermostatOperatingStateHandler)
     // thermostat - end
-
-subscribe(waterdetectors,	"water",					waterHandler)
-   subscribe(location,			"location",					locationHandler)
-   subscribe(accelerations,    "acceleration",             accelerationHandler)
-   subscribe(energymeters,     "power",                    powerHandler)
+	subscribe(waterdetectors, "water", waterHandler)
+   	subscribe(location, "location", locationHandler)
+   	subscribe(accelerations,    "acceleration",             accelerationHandler)
+   	subscribe(energymeters,     "power",                    powerHandler)
 }
 
 def genericHandler(evt) {
+   log.debug("------------BEGIN------------------")
+   def boolified
+   if (evt.value == "inactive" || evt.value == "off" || evt.value == "false" || evt.value == "closed" || evt.value == "idle"){
+   		boolified = 0
+   } else if (evt.value == "active" || evt.value == "on"  || evt.value == "true" || evt.value == "open" || evt.value == "cooling" || evt.value == "heating"){
+		boolified = 1
+   } else {
+      	boolified = evt.value
+   }
+   
+   log.debug("bool: ${boolified}")
 
-   log.debug("------------------------------")
-	log.debug("date: ${evt.date}")
-	log.debug("name: ${evt.name}")
+   log.debug("date: ${evt.date}")
+   log.debug("name: ${evt.name}")
    log.debug("displayName: ${evt.displayName}")
    log.debug("device: ${evt.device}")
-   log.debug("deviceId: ${evt.deviceId}")
+   //log.debug("deviceId: ${evt.deviceId}")
    log.debug("value: ${evt.value}")
-   log.debug("isStateChange: ${evt.isStateChange()}")
-	log.debug("id: ${evt.id}")
-   log.debug("description: ${evt.description}")
-   log.debug("descriptionText: ${evt.descriptionText}")
-   log.debug("installedSmartAppId: ${evt.installedSmartAppId}")
-   log.debug("isoDate: ${evt.isoDate}")
-   log.debug("isDigital: ${evt.isDigital()}")
-   log.debug("isPhysical: ${evt.isPhysical()}")
-   log.debug("location: ${evt.location}")
-   log.debug("locationId: ${evt.locationId}")
-   log.debug("source: ${evt.source}")
-   log.debug("unit: ${evt.unit}")
+   //log.debug("isStateChange: ${evt.isStateChange()}")
+   //log.debug("id: ${evt.id}")
+   //log.debug("description: ${evt.description}")
+   //log.debug("descriptionText: ${evt.descriptionText}")
+   //log.debug("installedSmartAppId: ${evt.installedSmartAppId}")
+   //log.debug("isoDate: ${evt.isoDate}")
+   //log.debug("isDigital: ${evt.isDigital()}")
+   //log.debug("isPhysical: ${evt.isPhysical()}")
+   //log.debug("location: ${evt.location}")
+   //log.debug("locationId: ${evt.locationId}")
+   //log.debug("source: ${evt.source}")
+   //log.debug("unit: ${evt.unit}")
+   log.debug("-----------END-------------------")
+
 
    def json = "{"
    json += "\"date\":\"${evt.date}\","
@@ -160,7 +164,7 @@ def genericHandler(evt) {
    json += "\"displayName\":\"${evt.displayName}\","
    json += "\"device\":\"${evt.device}\","
    json += "\"deviceId\":\"${evt.deviceId}\","
-   json += "\"value\":\"${evt.value}\","
+   json += "\"value\":${boolified},"
    json += "\"isStateChange\":\"${evt.isStateChange()}\","
    json += "\"id\":\"${evt.id}\","
    json += "\"description\":\"${evt.description}\","
@@ -175,14 +179,15 @@ def genericHandler(evt) {
    json += "\"source\":\"${evt.source}\","
    json += "\"program\":\"SmartThings\""
    json += "}"
-   log.debug("JSON: ${json}")
+   //log.debug("JSON: ${json}")
+   //log.debug("value: ${evt.val}")
 
 //test local if statement --- begin
   def local = use_local.toBoolean()
 
    def logstash_server = "${logstash_host}:${logstash_port}"
 
- 
+
   if (local == true) {
   sendHubCommand(new physicalgraph.device.HubAction([
   method: "POST",
@@ -193,58 +198,58 @@ def genericHandler(evt) {
   ],
   body:json
   ]))
-  
+
   }
   else {
 
    def params = [
-   	uri: "http://${logstash_host}:${logstash_port}",
+    uri: "http://${logstash_host}:${logstash_port}",
        body: json
-       
 
-  
+
+
 
 //test local if statement --- end
 
 
 //original --- begin
 //   def params = [
-//   	uri: "http://${logstash_host}:${logstash_port}",
+//   uri: "http://${logstash_host}:${logstash_port}",
 //       body: json
-//original --- end     
-   
-   
+//original --- end
+
+
    ]
    try {
        httpPostJson(params)
    } catch ( groovyx.net.http.HttpResponseException ex ) {
-      	log.debug "Unexpected response error: ${ex.statusCode}"
+      log.debug "Unexpected response error: ${ex.statusCode}"
    }
 }
 }
 
 def alarmHandler(evt) {
-	genericHandler(evt)
+genericHandler(evt)
 }
 
 def coHandler(evt) {
-	genericHandler(evt)
+genericHandler(evt)
 }
 
 def indicatorHandler(evt) {
-	genericHandler(evt)
+genericHandler(evt)
 }
 
 def presenceHandler(evt) {
-	genericHandler(evt)
+genericHandler(evt)
 }
 
 def switchHandler(evt) {
-	genericHandler(evt)
+genericHandler(evt)
 }
 
 def smokeHandler(evt) {
-	genericHandler(evt)
+genericHandler(evt)
 }
 
 def levelHandler(evt) {
@@ -252,42 +257,42 @@ def levelHandler(evt) {
 }
 
 def contactHandler(evt) {
-	genericHandler(evt)
+genericHandler(evt)
 }
 
 def temperatureHandler(evt) {
-	genericHandler(evt)
+genericHandler(evt)
 }
 // add thermostat - begin
 def thermostatHandler(evt) {
-	genericHandler(evt)
+genericHandler(evt)
 }
 def thermostatOperatingStateHandler(evt) {
-	genericHandler(evt)
+genericHandler(evt)
 }
 // add thermostat - end
 def motionHandler(evt) {
-	genericHandler(evt)
+genericHandler(evt)
 }
 
 def modeHandler(evt) {
-	genericHandler(evt)
+genericHandler(evt)
 }
 
 def relayHandler(evt) {
-	genericHandler(evt)
+genericHandler(evt)
 }
 
 def waterHandler(evt) {
-	genericHandler(evt)
+genericHandler(evt)
 }
 
 def locationHandler(evt) {
-	genericHandler(evt)
+genericHandler(evt)
 }
 
 def accelerationHandler(evt) {
-	genericHandler(evt)
+genericHandler(evt)
 }
 
 def powerHandler(evt) {
