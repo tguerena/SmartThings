@@ -21,6 +21,7 @@ under the License.
 /**
 *
 *  Changelog:
+*  2016/06/01:  updated config to convert some values to 0 and 1 for graphing..ie: close/open
 *  2016/05/30:  added option to specify a local IP address for the logstash server
 *
 *
@@ -55,7 +56,7 @@ preferences {
     	input "temperatures", "capability.temperatureMeasurement", multiple: true, required: false
 	}
    //added thermostat section -- begin
-	section("Log these thermostat sensors:") {
+	section("Log these thermostats:") {
 		input "thermostats", "capability.thermostat", multiple: true, required: false
 	}
    //added thermostat section -- end
