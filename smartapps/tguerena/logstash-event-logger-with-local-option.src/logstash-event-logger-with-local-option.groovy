@@ -18,6 +18,13 @@ under the License.
 *
 */
 
+/**
+*
+*  Changelog:  added local option
+*
+*
+*/
+
 definition(
    name: "Logstash Event Logger - with local option",
    namespace: "tguerena",
