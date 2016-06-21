@@ -1,0 +1,43 @@
+- platform: mqtt
+  name: "Office Light"
+  state_topic: "smartthings/Office Light/switch"
+  command_topic: "smartthings/Office Light/switch"
+#  brightness_state_topic: "smartthings/Office Light/level"
+#  brightness_command_topic: "smartthings/Office Light/level"
+  payload_on: "on"
+  payload_off: "off"
+  retain: true
+  
+- platform: mqtt
+  name: "Bedroom Light"
+  state_topic: "smartthings/Bedroom Light/switch"
+  command_topic: "smartthings/Bedroom Light/switch"
+#  brightness_state_topic: "smartthings/Bedroom Light/level"
+#  brightness_command_topic: "smartthings/Bedroom Light/level"
+  payload_on: "on"
+  payload_off: "off"
+  retain: true
+  
+- platform: mqtt
+  name: "Kitchen Light"
+  state_topic: "smartthings/Kitchen Light/switch"
+  command_topic: "smartthings/Kitchen Light/switch"
+  payload_on: "on"
+  payload_off: "off"
+  retain: true
+  
+- platform: mqtt
+  name: "Breakfast Light"
+  state_topic: "smartthings/Breakfast Light/switch"
+  command_topic: "smartthings/Breakfast Light/switch"
+  payload_on: "on"
+  payload_off: "off"
+  retain: true
+  
+- platform: mqtt
+  name: "Couch Light"
+  state_topic: "smartthings/Couch Light/switch"
+  command_topic: "smartthings/Couch Light/switch"
+  payload_on: "on"
+  payload_off: "off"
+  retain: true
