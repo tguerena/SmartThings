@@ -1,0 +1,47 @@
+- platform: mqtt
+  state_topic: "smartthings/Bedroom Thermostat/temperature"
+  name: "Bedroom Thermostat"
+  qos: 0
+  unit_of_measurement: "°F"
+  #value_template: '{{ value.x }}'
+  value_template: '{{ value_json.value.x }}'
+  
+  
+- platform: mqtt
+  state_topic: "smartthings/Downstairs Thermostat/temperature"
+  name: "Downstairs Thermostat"
+  qos: 0
+  unit_of_measurement: "°F"
+  #value_template: '{{ value.x }}'
+  value_template: '{{ value_json.value.x }}'
+
+# Prediction of weather
+-  platform: yr 
+
+
+
+- platform: mqtt
+  state_topic: "smartthings/Aeon Home Energy Meter/power"
+  name: "Aeon Home Energy Meter"
+  qos: 0
+  unit_of_measurement: "W"
+  #value_template: '{{ value.x }}'
+  value_template: '{{ value_json.value.x }}'
+
+
+
+#{"name":"Bedroom Thermostat","value":"idle","type":"thermostatOperatingState"}}
+- platform: mqtt
+  state_topic: "smartthings/Downstairs Thermostat/thermostatOperatingState"
+  name: "Downstairs Thermostat"
+  qos: 0
+  #value_template: '{{ value.x }}'
+  value_template: '{{ value_json.value }}'
+
+
+- platform: mqtt
+  state_topic: "smartthings/Bedroom Thermostat/thermostatOperatingState"
+  name: "Bedroom Thermostat"
+  qos: 0
+  #value_template: '{{ value.x }}'
+  value_template: '{{ value_json.value }}'
