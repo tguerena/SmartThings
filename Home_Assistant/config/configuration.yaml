@@ -1,0 +1,50 @@
+mqtt:
+  broker: 10.0.0.20
+
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: 34.0918
+  longitude: -84.2209
+  # C for Celsius, F for Fahrenheit
+  temperature_unit: F
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: America/New_York
+
+# Checks for available updates
+updater:
+
+# Enables the frontend
+frontend:
+
+## Prediction of weather
+#sensor:
+#   platform: yr
+
+# Show links to resources in log and frontend
+#introduction:
+
+# Allows you to issue voice commands from the frontend
+conversation:
+
+# View all events in a logbook
+logbook:
+
+# Discover some devices automatically
+discovery: --net=host
+
+# Track the sun
+sun:
+
+# Enables support for tracking state changes over time.
+history:
+
+###  Devices  ###
+#alexa: !include devices/alexa.yaml
+switch: !include devices/switches.yaml
+binary_sensor: !include devices/contacts.yaml
+camera: !include devices/camera.yaml
+#power: !include devices/power.yaml
+sensor: !include devices/sensors.yaml
+media_player: !include devices/media_player.yaml
