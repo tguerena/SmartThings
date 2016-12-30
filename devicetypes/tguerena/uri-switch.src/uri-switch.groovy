@@ -150,13 +150,13 @@ def off() {
         	myGroovyMap += "${input_off_key_1}=${input_off_value_1}"
         }
         if (input_off_key_2){
-        	myGroovyMap += "${input_off_key_2}=${input_off_value_2}"
+        	myGroovyMap += "&${input_off_key_2}=${input_off_value_2}"
         }
         if (input_off_key_3){
-        	myGroovyMap += "${input_off_key_3}=${input_off_value_3}"
+        	myGroovyMap += "&${input_off_key_3}=${input_off_value_3}"
         }
         if (input_off_key_4){
-        	myGroovyMap += "${input_off_key_4}=${input_off_value_4}"
+        	myGroovyMap += "&${input_off_key_4}=${input_off_value_4}"
         }
 
 		def result = new physicalgraph.device.HubAction(
