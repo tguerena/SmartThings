@@ -108,6 +108,9 @@ def on() {
         if (input_on_key_4){
         	myGroovyMap += "&${input_on_key_4}=${input_on_value_4}"
         }
+        if (myGroovyMap == "" && input_on_value_1 != ""){
+        	myGroovyMap += input_on_value_1
+        }
         def json = new groovy.json.JsonBuilder(myGroovyMap)
         log.debug json
 
@@ -157,6 +160,9 @@ def off() {
         }
         if (input_off_key_4){
         	myGroovyMap += "&${input_off_key_4}=${input_off_value_4}"
+        }
+        if (myGroovyMap == "" && input_off_value_1 != ""){
+        	myGroovyMap += input_off_value_1
         }
 
 		def result = new physicalgraph.device.HubAction(
