@@ -124,11 +124,12 @@ def on() {
                 body: myGroovyMap
         )
         sendHubCommand(result)
-        sendEvent(name: "switch", value: "on") 
         log.debug "result" + result
         log.debug "Executing ON" 
 
 	}
+    sendEvent(name: "switch", value: "on") 
+    
 }
 
 def off() {
@@ -177,8 +178,9 @@ def off() {
         )
 
 			sendHubCommand(result)
-			sendEvent(name: "switch", value: "off")
 			log.debug "Executing OFF" 
 			log.debug result
 	}
+    sendEvent(name: "switch", value: "off")
+
 }
